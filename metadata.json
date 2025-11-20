@@ -1,0 +1,5 @@
+{
+  "name": "Angular Cupid Connect",
+  "description": "A modern dating application built with Angular and Tailwind CSS, featuring user discovery, real-time chat, and live streaming capabilities. This app showcases a sophisticated UI/UX for connecting people.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,30 @@
+<div class="p-4 pb-20 max-w-4xl mx-auto">
+  <header class="py-4">
+    <h1 class="text-3xl font-bold text-white">Seus <span class="text-pink-500">Matches</span></h1>
+    <p class="text-gray-400">Pessoas com quem você se conectou.</p>
+  </header>
+
+  @if (matches().length > 0) {
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-6">
+      @for (match of matches(); track match.id) {
+        @let convId = getConversationId(match.id);
+        <a [routerLink]="convId ? ['/chat', convId] : null" [class.pointer-events-none]="!convId">
+          <div class="relative aspect-square rounded-lg overflow-hidden group transition transform hover:-translate-y-1 duration-300 shadow-lg" [class.opacity-50]="!convId">
+            <img [ngSrc]="match.profile_image_url" [alt]="match.full_name" class="w-full h-full object-cover" fill>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-2">
+              <span class="text-white font-semibold text-sm truncate">{{ match.full_name }}</span>
+            </div>
+          </div>
+        </a>
+      }
+    </div>
+  } @else {
+    <div class="flex flex-col items-center justify-center text-center mt-20">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <h2 class="text-xl font-semibold text-gray-300 mt-4">Nenhum match ainda</h2>
+      <p class="text-gray-500 mt-2">Continue descobrindo para encontrar conexões!</p>
+    </div>
+  }
+</div>

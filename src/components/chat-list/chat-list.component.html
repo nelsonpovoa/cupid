@@ -1,0 +1,26 @@
+
+<div class="pb-20">
+  <header class="sticky top-0 bg-gray-900/80 backdrop-blur-sm z-10 p-4 border-b border-gray-700">
+    <h1 class="text-2xl font-bold text-center text-white">Mensagens</h1>
+  </header>
+  
+  <div class="p-2 space-y-2">
+    @for (conv of conversations(); track conv.id) {
+      <a [routerLink]="['/chat', conv.id]" class="flex items-center p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition-colors duration-200">
+        <div class="relative">
+          <img [ngSrc]="getOtherParticipantImage(conv)" alt="{{ conv.name }}" width="56" height="56" class="w-14 h-14 rounded-full object-cover">
+          @if (conv.unread_count > 0) {
+            <span class="absolute top-0 right-0 block h-3 w-3 rounded-full bg-pink-500 ring-2 ring-gray-800"></span>
+          }
+        </div>
+        <div class="ml-4 flex-1">
+          <div class="flex justify-between items-center">
+            <h3 class="font-semibold text-white">{{ conv.name }}</h3>
+            <span class="text-xs text-gray-400">10:00</span>
+          </div>
+          <p class="text-sm text-gray-400 truncate">{{ conv.last_message.content }}</p>
+        </div>
+      </a>
+    }
+  </div>
+</div>
